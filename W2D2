@@ -1,0 +1,83 @@
+class Board
+  attr_accessor :cups
+
+  def initialize(name1, name2)
+    @cups = Array.new(14) { Array.new }
+    @player1 = name1 
+    @player2 = name2 
+    self.place_stones
+    
+  end
+
+  def place_stones
+    # helper method to #initialize every non-store cup with four stones each
+    
+    @cups[0..5].each do |cup|
+      4.times do |i|
+        cup.push(:stone)
+    
+      end 
+    end 
+    
+    @cups[7..12].each do |cup|
+      4.times do |i|
+        cup.push(:stone)
+    
+      end 
+    end 
+
+  end
+
+  def valid_move?(start_pos)
+    
+  end
+
+  def make_move(start_pos, current_player_name)
+  
+    
+    num_stones = self.cups[start_pos].length
+    self.cups[start_pos] = []
+    
+    i = start_pos + 1 
+    while num_stones > 0 
+      unless i % 14 == 13  
+        self.cups[i%14].push(:stone)
+        
+        num_stones -= 1 
+      end 
+      i += 1 
+    end 
+    
+   render 
+   next_turn(i)
+    
+  end
+
+  def next_turn(ending_cup_idx)
+    if ending_cup_idx == 6 
+      return :prompt
+      
+    elsif self.cups[i].count == 1 
+      return :switch 
+      
+    else 
+      ending_cup_idx
+      make_move(ending_cup_idx, )
+    end 
+    
+  end
+
+  def render
+    print "      #{@cups[7..12].reverse.map { |cup| cup.count }}      \n"
+    puts "#{@cups[13].count} -------------------------- #{@cups[6].count}"
+    print "      #{@cups.take(6).map { |cup| cup.count }}      \n"
+    puts ""
+    puts ""
+  end
+
+  def one_side_empty?
+  end
+
+  def winner
+  end
+end
